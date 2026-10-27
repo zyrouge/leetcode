@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"slices"
 )
@@ -17,6 +18,7 @@ const TNNone = -1001
 func main() {
 	expectFunc("#1", buildTreeToSlices([]int{1, 2, 3, 4}, []int{2, 1, 3, 4}), []int{1, 2, 3, TNNone, TNNone, TNNone, 4}, slices.Equal)
 	expectFunc("#2", buildTreeToSlices([]int{1}, []int{1}), []int{1}, slices.Equal)
+	expectFunc("#3", buildTreeToSlices([]int{3, 9, 20, 15, 7}, []int{9, 3, 15, 20, 7}), []int{3, 9, 20, TNNone, TNNone, 15, 7}, slices.Equal)
 }
 
 func expectFunc[T any](message string, got T, expected T, equals func(T, T) bool) {
@@ -28,23 +30,22 @@ func expectFunc[T any](message string, got T, expected T, equals func(T, T) bool
 }
 
 func treeNodeToSlice(root *TreeNode) []int {
-	nums := make([]int, 0)
-	if root == nil {
-		return make([]int, 0)
-	}
+	result := make([]int, 0)
 	queue := []*TreeNode{root}
 	for len(queue) > 0 {
 		node := queue[0]
 		queue = queue[1:]
-		nums = append(nums, node.Val)
-		if node.Left != nil {
-			queue = append(queue, node.Left)
+		if node == nil {
+			result = append(result, TNNone)
+			continue
 		}
-		if node.Right != nil {
-			queue = append(queue, node.Right)
-		}
+		result = append(result, node.Val)
+		queue = append(queue, node.Left, node.Right)
 	}
-	return nums
+	for len(result) > 0 && result[len(result)-1] == TNNone {
+		result = result[:len(result)-1]
+	}
+	return result
 }
 
 func buildTreeToSlices(preorder, inorder []int) []int {
@@ -53,14 +54,22 @@ func buildTreeToSlices(preorder, inorder []int) []int {
 }
 
 func buildTree(preorder []int, inorder []int) *TreeNode {
-	// for len(preorder) > 0 || len(inorder) > 0 {
-	// in  - [2, 1, -, 3, -, 4, -]
-	// pre - [1, 2, 3, 4]
-	// }
-	var build func() *TreeNode
-	build = func() *TreeNode {
-
-		return nil
+	pi, ii := 0, 0
+	var dfs func(limit int) *TreeNode
+	dfs = func(limit int) *TreeNode {
+		if pi >= len(preorder) {
+			return nil
+		}
+		if inorder[ii] == limit {
+			ii++
+			return nil
+		}
+		root := &TreeNode{preorder[pi], nil, nil}
+		pi++
+		// fmt.Println(root.Val, preorder[pi:], inorder[ii:], limit)
+		root.Left = dfs(root.Val)
+		root.Right = dfs(limit)
+		return root
 	}
-	return build()
+	return dfs(math.MaxInt)
 }
