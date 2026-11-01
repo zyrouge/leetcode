@@ -2,9 +2,11 @@
 
 My Leetcode solutions.
 
-## Notes
+## Links
 
-- [search-for-word-ii](./search-for-word-ii/) exceeds time limit for some test cases.
+- [Neetcode Blind 75](https://neetcode.io/practice/practice/blind75)
+- [Leetcode Cheatsheet](https://jwl-7.github.io/leetcode-cheatsheet)
+- [System Design Cheatsheet](https://bhavul.github.io/System-Design-Cheatsheet)
 
 ## LICENSE
 
