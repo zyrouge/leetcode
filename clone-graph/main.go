@@ -9,7 +9,7 @@ import (
 func main() {
 	expectFunc("#1", cloneGraphFromSlices([][]int{{2}, {1, 3}, {2}}), [][]int{{2}, {1, 3}, {2}}, nestedSliceEqualFunc)
 	expectFunc("#2", cloneGraphFromSlices([][]int{{}}), [][]int{{}}, nestedSliceEqualFunc)
-	expectFunc("#2", cloneGraphFromSlices([][]int{}), [][]int{}, nestedSliceEqualFunc)
+	expectFunc("#3", cloneGraphFromSlices([][]int{}), [][]int{}, nestedSliceEqualFunc)
 }
 
 func nestedSliceEqualFunc[T comparable](a, b [][]T) bool {

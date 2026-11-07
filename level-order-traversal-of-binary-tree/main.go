@@ -17,7 +17,7 @@ const TNNone = -101
 func main() {
 	expectFunc("#1", levelOrderFromSlices([]int{1, 2, 3, 4, 5, 6, 7}), [][]int{{1}, {2, 3}, {4, 5, 6, 7}}, nestedSliceEqualFunc)
 	expectFunc("#2", levelOrderFromSlices([]int{1}), [][]int{{1}}, nestedSliceEqualFunc)
-	expectFunc("#2", levelOrderFromSlices([]int{}), [][]int{}, nestedSliceEqualFunc)
+	expectFunc("#3", levelOrderFromSlices([]int{}), [][]int{}, nestedSliceEqualFunc)
 }
 
 func nestedSliceEqualFunc[T comparable](a, b [][]T) bool {

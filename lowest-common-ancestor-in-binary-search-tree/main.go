@@ -16,7 +16,7 @@ const TNNone = -101
 func main() {
 	expect("#1", lowestCommonAncestorFromSlices([]int{5, 3, 8, 1, 4, 7, 9, TNNone, 2}, 3, 8), 5)
 	expect("#2", lowestCommonAncestorFromSlices([]int{5, 3, 8, 1, 4, 7, 9, TNNone, 2}, 3, 4), 3)
-	expect("#2", lowestCommonAncestorFromSlices([]int{5, 3, 8, 1, 4, 7, 9, TNNone, 2}, 1, 2), 1)
+	expect("#3", lowestCommonAncestorFromSlices([]int{5, 3, 8, 1, 4, 7, 9, TNNone, 2}, 1, 2), 1)
 }
 
 func expect[T comparable](message string, got T, expected T) {

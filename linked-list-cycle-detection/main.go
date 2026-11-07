@@ -13,7 +13,7 @@ type ListNode struct {
 func main() {
 	expect("#1", hasCycleFromSlices([]int{1, 2, 3, 4}, 1), true)
 	expect("#2", hasCycleFromSlices([]int{1, 2}, -1), false)
-	expect("#2", hasCycleFromSlices([]int{1, 2, 1}, -1), false)
+	expect("#3", hasCycleFromSlices([]int{1, 2, 1}, -1), false)
 }
 
 func expect[T comparable](message string, got T, expected T) {
